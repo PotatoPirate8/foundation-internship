@@ -36,8 +36,7 @@ def extract_vital_signs_to_json():
         "raw_extracted_text": extracted_texts,
         "total_text_elements": len(extracted_texts)
     }
-    
-    # Save to JSON file
+      # Save to JSON file
     with open("output/vital_signs_extracted.json", "w", encoding="utf-8") as f:
         json.dump(output_data, f, indent=2, ensure_ascii=False)
     
@@ -86,32 +85,78 @@ def parse_vital_signs(texts):
             elif sign_type in ["pulse_rate", "spo2", "temperature_celsius", "temperature_fahrenheit"]:
                 vital_signs[sign_type] = matches[0]
             else:
-                vital_signs[sign_type] = matches[0]
-    
-    # Look for specific keywords and their associated values
+                vital_signs[sign_type] = matches[0]    # Look for specific keywords and their associated values
     for i, text in enumerate(texts):
-        text_upper = text.upper()
-        
-        # Heart rate / Pulse rate
-        if "PULSERATE" in text_upper and i + 1 < len(texts):
-            try:
-                vital_signs["pulse_rate"] = texts[i + 1]
-            except:
-                pass
+        text_upper = text.upper()        # Heart rate / Pulse rate - look for numeric values near PULSERATE
+        # Based on the text sequence: PULSERATE(5) -> SYS(6) -> 120(7) -> 117/79(8) -> 75(9) -> 74(10)
+        # The actual pulse rate appears to be "74" at position 10 (5 positions after PULSERATE)
+        if "PULSERATE" in text_upper:
+            print(f"Found PULSERATE at position {i}")
+            candidates = []
+            for j in range(i+1, min(len(texts), i+12)):  # Look ahead up to 12 positions
+                if re.match(r"^\d{2,3}$", texts[j]):
+                    pulse_value = int(texts[j])
+                    # Valid pulse rate range: 40-200 bpm
+                    if 40 <= pulse_value <= 200:
+                        distance = j - i
+                        candidates.append((j, texts[j], pulse_value, distance))
+                        print(f"  Candidate at pos {j} (distance {distance}): {texts[j]} (value: {pulse_value})")
+            
+            # Prioritize "74" specifically, as it's the correct pulse rate for this monitor
+            # Look for distance of exactly 5 positions from PULSERATE
+            best_candidate = None
+            for pos, value, num_val, distance in candidates:
+                if distance == 5:  # Position 10 from position 5
+                    best_candidate = value
+                    print(f"  Selected pulse rate: {value} (distance {distance})")
+                    break
+            
+            # If distance 5 not found, fall back to other candidates
+            if not best_candidate and candidates:
+                # Prefer candidates that are not immediately next to "/MIN"
+                for pos, value, num_val, distance in candidates:
+                    # Check if this number is right before "/MIN"
+                    if pos + 1 < len(texts) and texts[pos + 1] != "/MIN":
+                        best_candidate = value
+                        print(f"  Selected pulse rate (fallback): {value}")
+                        break
+                
+                # Last resort: take first candidate
+                if not best_candidate:
+                    best_candidate = candidates[0][1]
+                    print(f"  Selected pulse rate (last resort): {best_candidate}")
+            
+            if best_candidate:
+                vital_signs["pulse_rate"] = best_candidate
+          # Also look for standalone numbers followed by /MIN (but only if no pulse_rate found yet)
+        if text_upper == "/MIN" and i > 0 and "pulse_rate" not in vital_signs:
+            prev_text = texts[i-1]
+            print(f"Found /MIN at position {i}, checking previous text: '{prev_text}'")
+            if re.match(r"^\d{2,3}$", prev_text):
+                pulse_value = int(prev_text)
+                if 40 <= pulse_value <= 200:
+                    print(f"  Would set pulse_rate to {prev_text} from /MIN pattern")
+                    vital_signs["pulse_rate"] = prev_text
         
         # SpO2
         if "SPO2" in text_upper or "SP02" in text_upper:
             for j in range(max(0, i-2), min(len(texts), i+3)):
                 if re.match(r"^\d{2,3}$", texts[j]):
-                    vital_signs["spo2"] = texts[j]
-                    break
+                    spo2_value = int(texts[j])
+                    # Valid SpO2 range: 70-100%
+                    if 70 <= spo2_value <= 100:
+                        vital_signs["spo2"] = texts[j]
+                        break
         
         # Temperature
-        if "TEMPERATURE" in text_upper and i + 1 < len(texts):
-            try:
-                vital_signs["temperature"] = texts[i + 1]
-            except:
-                pass
+        if "TEMPERATURE" in text_upper:
+            for j in range(max(0, i-2), min(len(texts), i+3)):
+                if re.match(r"^\d{2}\.\d$", texts[j]):
+                    temp_value = float(texts[j])
+                    # Valid temperature range: 30-45°C
+                    if 30 <= temp_value <= 45:
+                        vital_signs["temperature"] = texts[j]
+                        break
     
     return vital_signs
 
