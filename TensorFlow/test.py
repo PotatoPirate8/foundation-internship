@@ -113,7 +113,7 @@ class VitalSignsExtractor:
         
         return model
     
-    def train_model(self, dataset_dir="../Generate test images/generated_heart_monitors", epochs=50):
+    def train_model(self, dataset_dir="generated_heart_monitors", epochs=50):
         """Train the model on the dataset"""
         print("Loading dataset...")
         X, y = self.load_dataset(dataset_dir)
@@ -155,13 +155,13 @@ class VitalSignsExtractor:
         print(f"Test MAE: {test_mae:.4f}")
         
         # Save model
-        model_path = "vital_signs_model.h5"
+        model_path = "TensorFlow/vital_signs_model.h5"
         self.model.save(model_path)
         print(f"Model saved to: {model_path}")
         
         return history
     
-    def load_model(self, model_path="vital_signs_model.h5"):
+    def load_model(self, model_path="TensorFlow/vital_signs_model.h5"):
         """Load a trained model"""
         if os.path.exists(model_path):
             self.model = keras.models.load_model(model_path)
@@ -243,7 +243,7 @@ def main():
         extractor.load_model(model_path)
     
     # Test on generated images
-    dataset_dir = "../Generate test images/generated_heart_monitors"
+    dataset_dir = "generated_heart_monitors"
     if os.path.exists(dataset_dir):
         # Get list of image files
         image_files = [f for f in os.listdir(dataset_dir) if f.endswith('.png')]
@@ -252,7 +252,7 @@ def main():
         print(f"\nTesting on {len(image_paths)} images...")
         
         # Make predictions
-        results = extractor.predict_batch(image_paths, "vital_signs_predictions.json")
+        results = extractor.predict_batch(image_paths, "TensorFlow/vital_signs_predictions.json")
         
         # Display results
         print("\nPrediction Results:")
