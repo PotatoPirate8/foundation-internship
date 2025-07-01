@@ -2,7 +2,7 @@
 
 ## 🔍 **Problem Analysis**
 
-Your current CNN approach has fundamental issues that explain why predicted values are so far from ground truth:
+Current CNN approach has fundamental issues that explain why predicted values are so far from ground truth:
 
 ### Current CNN Results (Poor):
 - **Overall MAE**: 19.2 (terrible performance)
@@ -30,7 +30,7 @@ Medical Monitor Image → Text Detection → OCR → Text Parsing → 6 Numerica
 ## ❌ **Why Your CNN Approach Fails**
 
 ### 1. **Impossible Learning Task**
-- You're asking a CNN to learn visual patterns of every possible number (0-200+ for heart rate, systolic BP, etc.)
+- Asking a CNN to learn visual patterns of every possible number (0-200+ for heart rate, systolic BP, etc.)
 - Different fonts, sizes, colors, positions make this nearly impossible
 - Like asking someone to memorize what "127" looks like in every possible font
 

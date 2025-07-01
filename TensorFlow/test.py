@@ -1,3 +1,5 @@
+# Medical Monitor Image → CNN → 6 Numerical Values
+
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
@@ -866,7 +868,7 @@ class VitalSignsExtractor:
                 result = self.predict_vital_signs(image_path)
                 pred_vitals = result['vital_signs']
                 gt_vitals = item['vitals']
-                
+
                 # Extract prediction values
                 pred_values = [
                     pred_vitals['heart_rate'],
