@@ -1,0 +1,182 @@
+[
+  {
+    "iteration": 1,
+    "normalized_mae": 0.8962920904159546,
+    "actual_mae": 11.254387601216635,
+    "test_loss": 0.4816697835922241
+  },
+  {
+    "iteration": 2,
+    "normalized_mae": 0.9019597768783569,
+    "actual_mae": 11.32306152979533,
+    "test_loss": 0.4853135645389557
+  },
+  {
+    "iteration": 3,
+    "normalized_mae": 0.9032086730003357,
+    "actual_mae": 11.350855890909832,
+    "test_loss": 0.48478105664253235
+  },
+  {
+    "iteration": 4,
+    "normalized_mae": 0.9054821729660034,
+    "actual_mae": 11.378885173797608,
+    "test_loss": 0.4854077696800232
+  },
+  {
+    "iteration": 5,
+    "normalized_mae": 0.9036136269569397,
+    "actual_mae": 11.357247575124106,
+    "test_loss": 0.48299333453178406
+  },
+  {
+    "iteration": 6,
+    "normalized_mae": 0.9040648937225342,
+    "actual_mae": 11.349979146321616,
+    "test_loss": 0.48223134875297546
+  },
+  {
+    "iteration": 7,
+    "normalized_mae": 0.900538444519043,
+    "actual_mae": 11.284911060333252,
+    "test_loss": 0.47925516963005066
+  },
+  {
+    "iteration": 8,
+    "normalized_mae": 0.9056320190429688,
+    "actual_mae": 11.305896663665772,
+    "test_loss": 0.48309341073036194
+  },
+  {
+    "iteration": 9,
+    "normalized_mae": 0.9088634252548218,
+    "actual_mae": 11.34726848602295,
+    "test_loss": 0.4855930805206299
+  },
+  {
+    "iteration": 10,
+    "normalized_mae": 0.9090567231178284,
+    "actual_mae": 11.332428201039633,
+    "test_loss": 0.4849007725715637
+  },
+  {
+    "iteration": 11,
+    "normalized_mae": 0.9103071093559265,
+    "actual_mae": 11.253714466094971,
+    "test_loss": 0.48458847403526306
+  },
+  {
+    "iteration": 12,
+    "normalized_mae": 0.9137738347053528,
+    "actual_mae": 11.288819217681885,
+    "test_loss": 0.487101674079895
+  },
+  {
+    "iteration": 13,
+    "normalized_mae": 0.9120912551879883,
+    "actual_mae": 11.241876983642578,
+    "test_loss": 0.4859771132469177
+  },
+  {
+    "iteration": 14,
+    "normalized_mae": 0.9146062731742859,
+    "actual_mae": 11.245447540283203,
+    "test_loss": 0.4878716468811035
+  },
+  {
+    "iteration": 15,
+    "normalized_mae": 0.9202359914779663,
+    "actual_mae": 11.2423490524292,
+    "test_loss": 0.49280595779418945
+  },
+  {
+    "iteration": 16,
+    "normalized_mae": 0.9244588613510132,
+    "actual_mae": 11.281274700164795,
+    "test_loss": 0.4970768392086029
+  },
+  {
+    "iteration": 17,
+    "normalized_mae": 0.929614245891571,
+    "actual_mae": 11.335619990030926,
+    "test_loss": 0.5017952919006348
+  },
+  {
+    "iteration": 18,
+    "normalized_mae": 0.9378488063812256,
+    "actual_mae": 11.421380106608074,
+    "test_loss": 0.5073966979980469
+  },
+  {
+    "iteration": 19,
+    "normalized_mae": 0.940445065498352,
+    "actual_mae": 11.41190773646037,
+    "test_loss": 0.5079514980316162
+  },
+  {
+    "iteration": 20,
+    "normalized_mae": 0.9465339183807373,
+    "actual_mae": 11.454612000783285,
+    "test_loss": 0.5121887922286987
+  },
+  {
+    "iteration": 21,
+    "normalized_mae": 0.9525023698806763,
+    "actual_mae": 11.484083557128907,
+    "test_loss": 0.5170010328292847
+  },
+  {
+    "iteration": 22,
+    "normalized_mae": 0.9563092589378357,
+    "actual_mae": 11.497131252288819,
+    "test_loss": 0.5206670165061951
+  },
+  {
+    "iteration": 23,
+    "normalized_mae": 0.9578195214271545,
+    "actual_mae": 11.469554169972739,
+    "test_loss": 0.5222041606903076
+  },
+  {
+    "iteration": 24,
+    "normalized_mae": 0.9615566730499268,
+    "actual_mae": 11.491652870178223,
+    "test_loss": 0.5266711711883545
+  },
+  {
+    "iteration": 25,
+    "normalized_mae": 0.9641581773757935,
+    "actual_mae": 11.487099711100262,
+    "test_loss": 0.5302650928497314
+  },
+  {
+    "iteration": 26,
+    "normalized_mae": 0.9687793254852295,
+    "actual_mae": 11.512962563832602,
+    "test_loss": 0.5355148315429688
+  },
+  {
+    "iteration": 27,
+    "normalized_mae": 0.9751625657081604,
+    "actual_mae": 11.550846799214682,
+    "test_loss": 0.5424354076385498
+  },
+  {
+    "iteration": 28,
+    "normalized_mae": 0.9766018390655518,
+    "actual_mae": 11.529393895467123,
+    "test_loss": 0.5445780754089355
+  },
+  {
+    "iteration": 29,
+    "normalized_mae": 0.9708600044250488,
+    "actual_mae": 11.385003153483074,
+    "test_loss": 0.5414533019065857
+  },
+  {
+    "iteration": 30,
+    "normalized_mae": 0.9745745658874512,
+    "actual_mae": 11.407946332295737,
+    "test_loss": 0.5449494123458862
+  }
+]
