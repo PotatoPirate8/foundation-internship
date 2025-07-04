@@ -1,0 +1,566 @@
+{
+  "metadata": {
+    "timestamp": "2025-07-04T18:51:26.100352",
+    "source_file": "medical_monitor_res.json",
+    "input_image": "../Heart monitor images/medical_monitor.jpg",
+    "text_type": "general",
+    "rec_score_threshold": 0.0,
+    "total_text_regions": 45
+  },
+  "model_info": {
+    "model_settings": {
+      "use_doc_preprocessor": true,
+      "use_textline_orientation": false
+    },
+    "detection_params": {
+      "limit_side_len": 64,
+      "limit_type": "min",
+      "thresh": 0.3,
+      "max_side_limit": 4000,
+      "box_thresh": 0.6,
+      "unclip_ratio": 1.5
+    }
+  },
+  "ocr_results": [
+    {
+      "text": "RN:33398968",
+      "confidence": 0.979475736618042,
+      "box_midpoint": {
+        "x": 129.0,
+        "y": 156.0
+      },
+      "poly_midpoint": {
+        "x": 129.0,
+        "y": 156.0
+      }
+    },
+    {
+      "text": "15:13",
+      "confidence": 0.9617210626602173,
+      "box_midpoint": {
+        "x": 497.5,
+        "y": 154.0
+      },
+      "poly_midpoint": {
+        "x": 497.5,
+        "y": 154.0
+      }
+    },
+    {
+      "text": "21/10/2010",
+      "confidence": 0.996274471282959,
+      "box_midpoint": {
+        "x": 622.0,
+        "y": 153.5
+      },
+      "poly_midpoint": {
+        "x": 622.0,
+        "y": 153.5
+      }
+    },
+    {
+      "text": "NIBP",
+      "confidence": 0.995470404624939,
+      "box_midpoint": {
+        "x": 48.0,
+        "y": 204.0
+      },
+      "poly_midpoint": {
+        "x": 48.0,
+        "y": 204.0
+      }
+    },
+    {
+      "text": "220",
+      "confidence": 0.999432384967804,
+      "box_midpoint": {
+        "x": 409.5,
+        "y": 206.5
+      },
+      "poly_midpoint": {
+        "x": 409.5,
+        "y": 206.5
+      }
+    },
+    {
+      "text": "PULSE RATE",
+      "confidence": 0.9595449566841125,
+      "box_midpoint": {
+        "x": 512.0,
+        "y": 202.0
+      },
+      "poly_midpoint": {
+        "x": 512.0,
+        "y": 202.0
+      }
+    },
+    {
+      "text": "SYS",
+      "confidence": 0.9789490699768066,
+      "box_midpoint": {
+        "x": 382.5,
+        "y": 208.0
+      },
+      "poly_midpoint": {
+        "x": 382.5,
+        "y": 208.0
+      }
+    },
+    {
+      "text": "120",
+      "confidence": 0.9993174076080322,
+      "box_midpoint": {
+        "x": 832.5,
+        "y": 210.5
+      },
+      "poly_midpoint": {
+        "x": 832.5,
+        "y": 210.5
+      }
+    },
+    {
+      "text": "117/79",
+      "confidence": 0.9989948868751526,
+      "box_midpoint": {
+        "x": 150.0,
+        "y": 253.5
+      },
+      "poly_midpoint": {
+        "x": 150.0,
+        "y": 253.5
+      }
+    },
+    {
+      "text": "75",
+      "confidence": 0.9987812638282776,
+      "box_midpoint": {
+        "x": 407.5,
+        "y": 220.5
+      },
+      "poly_midpoint": {
+        "x": 407.5,
+        "y": 220.5
+      }
+    },
+    {
+      "text": "74",
+      "confidence": 0.999260663986206,
+      "box_midpoint": {
+        "x": 505.0,
+        "y": 252.5
+      },
+      "poly_midpoint": {
+        "x": 505.0,
+        "y": 252.5
+      }
+    },
+    {
+      "text": "START",
+      "confidence": 0.9980055689811707,
+      "box_midpoint": {
+        "x": 333.0,
+        "y": 272.0
+      },
+      "poly_midpoint": {
+        "x": 333.0,
+        "y": 272.0
+      }
+    },
+    {
+      "text": "SYS/DIA mmHg",
+      "confidence": 0.9455419182777405,
+      "box_midpoint": {
+        "x": 86.5,
+        "y": 303.5
+      },
+      "poly_midpoint": {
+        "x": 86.5,
+        "y": 303.5
+      }
+    },
+    {
+      "text": "[MAP90]",
+      "confidence": 0.9800699353218079,
+      "box_midpoint": {
+        "x": 176.0,
+        "y": 303.5
+      },
+      "poly_midpoint": {
+        "x": 176.0,
+        "y": 303.5
+      }
+    },
+    {
+      "text": "DIA 110",
+      "confidence": 0.9345902800559998,
+      "box_midpoint": {
+        "x": 396.5,
+        "y": 295.5
+      },
+      "poly_midpoint": {
+        "x": 396.5,
+        "y": 295.5
+      }
+    },
+    {
+      "text": "/MIN",
+      "confidence": 0.9900816679000854,
+      "box_midpoint": {
+        "x": 480.5,
+        "y": 303.0
+      },
+      "poly_midpoint": {
+        "x": 480.5,
+        "y": 303.0
+      }
+    },
+    {
+      "text": "35",
+      "confidence": 0.9987913370132446,
+      "box_midpoint": {
+        "x": 406.0,
+        "y": 311.0
+      },
+      "poly_midpoint": {
+        "x": 406.0,
+        "y": 311.0
+      }
+    },
+    {
+      "text": "50",
+      "confidence": 0.9992188215255737,
+      "box_midpoint": {
+        "x": 834.0,
+        "y": 307.5
+      },
+      "poly_midpoint": {
+        "x": 834.0,
+        "y": 307.5
+      }
+    },
+    {
+      "text": "INTERVALS:AUtOmatic",
+      "confidence": 0.8902061581611633,
+      "box_midpoint": {
+        "x": 93.0,
+        "y": 322.5
+      },
+      "poly_midpoint": {
+        "x": 93.0,
+        "y": 322.5
+      }
+    },
+    {
+      "text": "SOURCE:SpO₂",
+      "confidence": 0.9347808957099915,
+      "box_midpoint": {
+        "x": 501.5,
+        "y": 322.5
+      },
+      "poly_midpoint": {
+        "x": 501.25,
+        "y": 322.5
+      }
+    },
+    {
+      "text": "SpO2",
+      "confidence": 0.9087942242622375,
+      "box_midpoint": {
+        "x": 50.0,
+        "y": 359.0
+      },
+      "poly_midpoint": {
+        "x": 50.0,
+        "y": 359.0
+      }
+    },
+    {
+      "text": "100",
+      "confidence": 0.9991267323493958,
+      "box_midpoint": {
+        "x": 398.5,
+        "y": 365.0
+      },
+      "poly_midpoint": {
+        "x": 398.5,
+        "y": 365.0
+      }
+    },
+    {
+      "text": "TEMPERATURE",
+      "confidence": 0.9985792636871338,
+      "box_midpoint": {
+        "x": 526.0,
+        "y": 359.5
+      },
+      "poly_midpoint": {
+        "x": 526.0,
+        "y": 359.5
+      }
+    },
+    {
+      "text": "38.3",
+      "confidence": 0.9980107545852661,
+      "box_midpoint": {
+        "x": 834.0,
+        "y": 365.5
+      },
+      "poly_midpoint": {
+        "x": 834.0,
+        "y": 365.5
+      }
+    },
+    {
+      "text": "98",
+      "confidence": 0.9989656805992126,
+      "box_midpoint": {
+        "x": 68.0,
+        "y": 408.5
+      },
+      "poly_midpoint": {
+        "x": 68.0,
+        "y": 408.5
+      }
+    },
+    {
+      "text": "36.3",
+      "confidence": 0.9995230436325073,
+      "box_midpoint": {
+        "x": 544.0,
+        "y": 410.0
+      },
+      "poly_midpoint": {
+        "x": 544.0,
+        "y": 410.0
+      }
+    },
+    {
+      "text": "%",
+      "confidence": 0.999883770942688,
+      "box_midpoint": {
+        "x": 130.5,
+        "y": 417.0
+      },
+      "poly_midpoint": {
+        "x": 130.5,
+        "y": 417.0
+      }
+    },
+    {
+      "text": "90",
+      "confidence": 0.9997662901878357,
+      "box_midpoint": {
+        "x": 400.0,
+        "y": 456.0
+      },
+      "poly_midpoint": {
+        "x": 400.0,
+        "y": 456.0
+      }
+    },
+    {
+      "text": "℃[97.1°F]",
+      "confidence": 0.9277833104133606,
+      "box_midpoint": {
+        "x": 502.5,
+        "y": 459.0
+      },
+      "poly_midpoint": {
+        "x": 502.5,
+        "y": 459.0
+      }
+    },
+    {
+      "text": "34.4",
+      "confidence": 0.9983071088790894,
+      "box_midpoint": {
+        "x": 834.0,
+        "y": 456.5
+      },
+      "poly_midpoint": {
+        "x": 834.0,
+        "y": 456.5
+      }
+    },
+    {
+      "text": "HEIGHT",
+      "confidence": 0.9949169754981995,
+      "box_midpoint": {
+        "x": 483.0,
+        "y": 510.5
+      },
+      "poly_midpoint": {
+        "x": 483.0,
+        "y": 510.5
+      }
+    },
+    {
+      "text": "WEIGHT",
+      "confidence": 0.9958264231681824,
+      "box_midpoint": {
+        "x": 556.0,
+        "y": 510.5
+      },
+      "poly_midpoint": {
+        "x": 556.0,
+        "y": 510.5
+      }
+    },
+    {
+      "text": "PAIN",
+      "confidence": 0.9970740675926208,
+      "box_midpoint": {
+        "x": 629.0,
+        "y": 510.5
+      },
+      "poly_midpoint": {
+        "x": 629.0,
+        "y": 510.5
+      }
+    },
+    {
+      "text": "PR",
+      "confidence": 0.9901888370513916,
+      "box_midpoint": {
+        "x": 693.0,
+        "y": 510.5
+      },
+      "poly_midpoint": {
+        "x": 693.0,
+        "y": 510.5
+      }
+    },
+    {
+      "text": "Tester, Leo",
+      "confidence": 0.9746700525283813,
+      "box_midpoint": {
+        "x": 93.5,
+        "y": 528.0
+      },
+      "poly_midpoint": {
+        "x": 93.5,
+        "y": 528.0
+      }
+    },
+    {
+      "text": "Adult",
+      "confidence": 0.9974411129951477,
+      "box_midpoint": {
+        "x": 386.0,
+        "y": 527.5
+      },
+      "poly_midpoint": {
+        "x": 386.0,
+        "y": 527.5
+      }
+    },
+    {
+      "text": "Save",
+      "confidence": 0.995311439037323,
+      "box_midpoint": {
+        "x": 813.5,
+        "y": 530.0
+      },
+      "poly_midpoint": {
+        "x": 813.5,
+        "y": 530.0
+      }
+    },
+    {
+      "text": "m",
+      "confidence": 0.968279242515564,
+      "box_midpoint": {
+        "x": 479.5,
+        "y": 541.0
+      },
+      "poly_midpoint": {
+        "x": 479.5,
+        "y": 541.0
+      }
+    },
+    {
+      "text": "ke",
+      "confidence": 0.6534842848777771,
+      "box_midpoint": {
+        "x": 554.0,
+        "y": 541.0
+      },
+      "poly_midpoint": {
+        "x": 554.0,
+        "y": 541.0
+      }
+    },
+    {
+      "text": "om",
+      "confidence": 0.6227109432220459,
+      "box_midpoint": {
+        "x": 703.5,
+        "y": 541.5
+      },
+      "poly_midpoint": {
+        "x": 703.5,
+        "y": 541.5
+      }
+    },
+    {
+      "text": "Home",
+      "confidence": 0.9980866312980652,
+      "box_midpoint": {
+        "x": 83.0,
+        "y": 591.5
+      },
+      "poly_midpoint": {
+        "x": 83.0,
+        "y": 591.5
+      }
+    },
+    {
+      "text": "Patients",
+      "confidence": 0.9911113381385803,
+      "box_midpoint": {
+        "x": 228.0,
+        "y": 590.0
+      },
+      "poly_midpoint": {
+        "x": 227.75,
+        "y": 590.25
+      }
+    },
+    {
+      "text": "Alarms",
+      "confidence": 0.9853464961051941,
+      "box_midpoint": {
+        "x": 371.5,
+        "y": 590.5
+      },
+      "poly_midpoint": {
+        "x": 371.5,
+        "y": 590.5
+      }
+    },
+    {
+      "text": "Review",
+      "confidence": 0.9907190799713135,
+      "box_midpoint": {
+        "x": 515.5,
+        "y": 590.0
+      },
+      "poly_midpoint": {
+        "x": 515.75,
+        "y": 590.0
+      }
+    },
+    {
+      "text": "Settings",
+      "confidence": 0.9943200349807739,
+      "box_midpoint": {
+        "x": 660.0,
+        "y": 591.0
+      },
+      "poly_midpoint": {
+        "x": 660.0,
+        "y": 591.0
+      }
+    }
+  ]
+}
