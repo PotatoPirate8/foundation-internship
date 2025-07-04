@@ -1,602 +1,602 @@
 [
   {
-    "filename": "monitor_001_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_001_hypertension.png",
+    "filename": "monitor_001_low_spo2.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_001_low_spo2.png",
     "ocr_vitals": {
-      "heart_rate": 131,
-      "systolic_bp": 149,
-      "diastolic_bp": 82,
-      "spo2": 95,
-      "temperature": 35.0,
-      "pulse_rate": 129
-    },
-    "vital_vector": [
-      131,
-      149,
-      82,
-      95,
-      35.0,
-      129
-    ],
-    "metadata_vitals": {
-      "heart_rate": 114,
-      "systolic_bp": 140,
-      "diastolic_bp": 72,
-      "spo2": 95,
-      "temperature": 36.2,
-      "respiratory_rate": 25,
-      "pulse_rate": 69
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_002_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_002_hypertension.png",
-    "ocr_vitals": {
-      "heart_rate": 123,
-      "systolic_bp": 99,
-      "diastolic_bp": 49,
-      "spo2": 97,
-      "temperature": 38.7,
-      "pulse_rate": 120
-    },
-    "vital_vector": [
-      123,
-      99,
-      49,
-      97,
-      38.7,
-      120
-    ],
-    "metadata_vitals": {
-      "heart_rate": 110,
-      "systolic_bp": 97,
-      "diastolic_bp": 66,
+      "heart_rate": 112,
+      "systolic_bp": 114,
+      "diastolic_bp": 73,
       "spo2": 100,
-      "temperature": 38.7,
-      "respiratory_rate": 21,
-      "pulse_rate": 89
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_003_normal.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_003_normal.png",
-    "ocr_vitals": {
-      "heart_rate": 108,
-      "systolic_bp": 112,
-      "diastolic_bp": 82,
-      "spo2": 100,
-      "temperature": 36.4,
-      "pulse_rate": 110
+      "temperature": 38.6,
+      "pulse_rate": 113
     },
     "vital_vector": [
-      108,
       112,
-      82,
+      114,
+      73,
       100,
-      36.4,
-      110
+      38.6,
+      113
     ],
     "metadata_vitals": {
       "heart_rate": 102,
-      "systolic_bp": 115,
-      "diastolic_bp": 87,
+      "systolic_bp": 110,
+      "diastolic_bp": 79,
       "spo2": 100,
-      "temperature": 39.0,
-      "respiratory_rate": 25,
-      "pulse_rate": 99
-    },
-    "scenario": "normal"
-  },
-  {
-    "filename": "monitor_004_low_spo2.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_004_low_spo2.png",
-    "ocr_vitals": {
-      "heart_rate": 106,
-      "systolic_bp": 84,
-      "diastolic_bp": 72,
-      "spo2": 93,
-      "temperature": 40.3,
-      "pulse_rate": 109
-    },
-    "vital_vector": [
-      106,
-      84,
-      72,
-      93,
-      40.3,
-      109
-    ],
-    "metadata_vitals": {
-      "heart_rate": 117,
-      "systolic_bp": 92,
-      "diastolic_bp": 78,
-      "spo2": 96,
-      "temperature": 38.9,
-      "respiratory_rate": 16,
-      "pulse_rate": 80
-    },
-    "scenario": "low_spo2"
-  },
-  {
-    "filename": "monitor_005_low_spo2.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_005_low_spo2.png",
-    "ocr_vitals": {
-      "heart_rate": 97,
-      "systolic_bp": 99,
-      "diastolic_bp": 75,
-      "spo2": 99,
-      "temperature": 38.0,
-      "pulse_rate": 100
-    },
-    "vital_vector": [
-      97,
-      99,
-      75,
-      99,
-      38.0,
-      100
-    ],
-    "metadata_vitals": {
-      "heart_rate": 91,
-      "systolic_bp": 100,
-      "diastolic_bp": 74,
-      "spo2": 98,
-      "temperature": 37.1,
-      "respiratory_rate": 15,
-      "pulse_rate": 108
-    },
-    "scenario": "low_spo2"
-  },
-  {
-    "filename": "monitor_006_low_spo2.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_006_low_spo2.png",
-    "ocr_vitals": {
-      "heart_rate": 91,
-      "systolic_bp": 112,
-      "diastolic_bp": 74,
-      "spo2": 93,
-      "temperature": 39.4,
-      "pulse_rate": 89
-    },
-    "vital_vector": [
-      91,
-      112,
-      74,
-      93,
-      39.4,
-      89
-    ],
-    "metadata_vitals": {
-      "heart_rate": 95,
-      "systolic_bp": 116,
-      "diastolic_bp": 72,
-      "spo2": 95,
-      "temperature": 38.4,
+      "temperature": 37.9,
       "respiratory_rate": 23,
       "pulse_rate": 74
     },
     "scenario": "low_spo2"
   },
   {
-    "filename": "monitor_007_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_007_hypertension.png",
+    "filename": "monitor_002_low_spo2.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_002_low_spo2.png",
     "ocr_vitals": {
-      "heart_rate": 75,
-      "systolic_bp": 165,
-      "diastolic_bp": 78,
-      "spo2": 97,
-      "temperature": 37.0,
-      "pulse_rate": 76
+      "heart_rate": 116,
+      "systolic_bp": 137,
+      "diastolic_bp": 68,
+      "spo2": 100,
+      "temperature": 36.1,
+      "pulse_rate": 111
     },
     "vital_vector": [
-      75,
-      165,
-      78,
-      97,
-      37.0,
-      76
+      116,
+      137,
+      68,
+      100,
+      36.1,
+      111
     ],
     "metadata_vitals": {
-      "heart_rate": 70,
-      "systolic_bp": 158,
-      "diastolic_bp": 77,
+      "heart_rate": 110,
+      "systolic_bp": 146,
+      "diastolic_bp": 61,
+      "spo2": 99,
+      "temperature": 36.1,
+      "respiratory_rate": 17,
+      "pulse_rate": 116
+    },
+    "scenario": "low_spo2"
+  },
+  {
+    "filename": "monitor_003_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_003_tachycardia.png",
+    "ocr_vitals": {
+      "heart_rate": 99,
+      "systolic_bp": 136,
+      "diastolic_bp": 68,
       "spo2": 97,
-      "temperature": 37.4,
+      "temperature": 38.3,
+      "pulse_rate": 97
+    },
+    "vital_vector": [
+      99,
+      136,
+      68,
+      97,
+      38.3,
+      97
+    ],
+    "metadata_vitals": {
+      "heart_rate": 110,
+      "systolic_bp": 130,
+      "diastolic_bp": 74,
+      "spo2": 97,
+      "temperature": 39.0,
       "respiratory_rate": 12,
-      "pulse_rate": 119
+      "pulse_rate": 62
+    },
+    "scenario": "tachycardia"
+  },
+  {
+    "filename": "monitor_004_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_004_hypertension.png",
+    "ocr_vitals": {
+      "heart_rate": 59,
+      "systolic_bp": 116,
+      "diastolic_bp": 79,
+      "spo2": 100,
+      "temperature": 37.2,
+      "pulse_rate": 56
+    },
+    "vital_vector": [
+      59,
+      116,
+      79,
+      100,
+      37.2,
+      56
+    ],
+    "metadata_vitals": {
+      "heart_rate": 62,
+      "systolic_bp": 106,
+      "diastolic_bp": 76,
+      "spo2": 99,
+      "temperature": 38.5,
+      "respiratory_rate": 20,
+      "pulse_rate": 102
+    },
+    "scenario": "hypertension"
+  },
+  {
+    "filename": "monitor_005_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_005_hypertension.png",
+    "ocr_vitals": {
+      "heart_rate": 113,
+      "systolic_bp": 109,
+      "diastolic_bp": 49,
+      "spo2": 98,
+      "temperature": 36.3,
+      "pulse_rate": 111
+    },
+    "vital_vector": [
+      113,
+      109,
+      49,
+      98,
+      36.3,
+      111
+    ],
+    "metadata_vitals": {
+      "heart_rate": 102,
+      "systolic_bp": 102,
+      "diastolic_bp": 64,
+      "spo2": 97,
+      "temperature": 38.8,
+      "respiratory_rate": 20,
+      "pulse_rate": 116
+    },
+    "scenario": "hypertension"
+  },
+  {
+    "filename": "monitor_006_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_006_tachycardia.png",
+    "ocr_vitals": {
+      "heart_rate": 74,
+      "systolic_bp": 90,
+      "diastolic_bp": 87,
+      "spo2": 96,
+      "temperature": 36.9,
+      "pulse_rate": 72
+    },
+    "vital_vector": [
+      74,
+      90,
+      87,
+      96,
+      36.9,
+      72
+    ],
+    "metadata_vitals": {
+      "heart_rate": 68,
+      "systolic_bp": 101,
+      "diastolic_bp": 88,
+      "spo2": 96,
+      "temperature": 38.6,
+      "respiratory_rate": 19,
+      "pulse_rate": 110
+    },
+    "scenario": "tachycardia"
+  },
+  {
+    "filename": "monitor_007_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_007_hypertension.png",
+    "ocr_vitals": {
+      "heart_rate": 89,
+      "systolic_bp": 120,
+      "diastolic_bp": 82,
+      "spo2": 94,
+      "temperature": 37.9,
+      "pulse_rate": 84
+    },
+    "vital_vector": [
+      89,
+      120,
+      82,
+      94,
+      37.9,
+      84
+    ],
+    "metadata_vitals": {
+      "heart_rate": 98,
+      "systolic_bp": 123,
+      "diastolic_bp": 67,
+      "spo2": 96,
+      "temperature": 38.9,
+      "respiratory_rate": 24,
+      "pulse_rate": 60
     },
     "scenario": "hypertension"
   },
   {
     "filename": "monitor_008_tachycardia.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_008_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_008_tachycardia.png",
     "ocr_vitals": {
-      "heart_rate": 64,
-      "systolic_bp": 121,
-      "diastolic_bp": 75,
-      "spo2": 94,
-      "temperature": 37.4,
-      "pulse_rate": 61
+      "heart_rate": 87,
+      "systolic_bp": 88,
+      "diastolic_bp": 68,
+      "spo2": 100,
+      "temperature": 35.0,
+      "pulse_rate": 86
     },
     "vital_vector": [
-      64,
-      121,
-      75,
-      94,
-      37.4,
-      61
+      87,
+      88,
+      68,
+      100,
+      35.0,
+      86
     ],
     "metadata_vitals": {
-      "heart_rate": 63,
-      "systolic_bp": 122,
-      "diastolic_bp": 79,
-      "spo2": 97,
-      "temperature": 37.9,
-      "respiratory_rate": 17,
-      "pulse_rate": 118
+      "heart_rate": 98,
+      "systolic_bp": 92,
+      "diastolic_bp": 69,
+      "spo2": 99,
+      "temperature": 37.5,
+      "respiratory_rate": 23,
+      "pulse_rate": 98
     },
     "scenario": "tachycardia"
   },
   {
     "filename": "monitor_009_normal.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_009_normal.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_009_normal.png",
     "ocr_vitals": {
-      "heart_rate": 115,
-      "systolic_bp": 100,
-      "diastolic_bp": 70,
+      "heart_rate": 94,
+      "systolic_bp": 123,
+      "diastolic_bp": 94,
       "spo2": 99,
-      "temperature": 39.6,
-      "pulse_rate": 112
+      "temperature": 36.3,
+      "pulse_rate": 92
     },
     "vital_vector": [
-      115,
-      100,
-      70,
+      94,
+      123,
+      94,
       99,
-      39.6,
-      112
+      36.3,
+      92
     ],
     "metadata_vitals": {
-      "heart_rate": 116,
-      "systolic_bp": 125,
-      "diastolic_bp": 79,
+      "heart_rate": 98,
+      "systolic_bp": 148,
+      "diastolic_bp": 85,
       "spo2": 100,
-      "temperature": 36.1,
-      "respiratory_rate": 19,
-      "pulse_rate": 102
+      "temperature": 37.0,
+      "respiratory_rate": 12,
+      "pulse_rate": 117
     },
     "scenario": "normal"
   },
   {
-    "filename": "monitor_010_normal.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_010_normal.png",
+    "filename": "monitor_010_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_010_tachycardia.png",
     "ocr_vitals": {
-      "heart_rate": 69,
-      "systolic_bp": 116,
-      "diastolic_bp": 83,
-      "spo2": 100,
-      "temperature": 36.8,
-      "pulse_rate": 67
-    },
-    "vital_vector": [
-      69,
-      116,
-      83,
-      100,
-      36.8,
-      67
-    ],
-    "metadata_vitals": {
-      "heart_rate": 72,
-      "systolic_bp": 107,
-      "diastolic_bp": 89,
-      "spo2": 97,
-      "temperature": 37.8,
-      "respiratory_rate": 13,
-      "pulse_rate": 83
-    },
-    "scenario": "normal"
-  },
-  {
-    "filename": "monitor_011_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_011_hypertension.png",
-    "ocr_vitals": {
-      "heart_rate": 59,
-      "systolic_bp": 110,
-      "diastolic_bp": 87,
-      "spo2": 95,
-      "temperature": 35.0,
-      "pulse_rate": 57
-    },
-    "vital_vector": [
-      59,
-      110,
-      87,
-      95,
-      35.0,
-      57
-    ],
-    "metadata_vitals": {
-      "heart_rate": 64,
-      "systolic_bp": 120,
-      "diastolic_bp": 86,
-      "spo2": 98,
-      "temperature": 36.2,
-      "respiratory_rate": 15,
-      "pulse_rate": 70
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_012_normal.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_012_normal.png",
-    "ocr_vitals": {
-      "heart_rate": 102,
-      "systolic_bp": 138,
-      "diastolic_bp": 69,
-      "spo2": 99,
-      "temperature": 37.6,
-      "pulse_rate": 107
-    },
-    "vital_vector": [
-      102,
-      138,
-      69,
-      99,
-      37.6,
-      107
-    ],
-    "metadata_vitals": {
-      "heart_rate": 101,
-      "systolic_bp": 150,
-      "diastolic_bp": 70,
-      "spo2": 100,
-      "temperature": 37.3,
-      "respiratory_rate": 21,
-      "pulse_rate": 68
-    },
-    "scenario": "normal"
-  },
-  {
-    "filename": "monitor_013_tachycardia.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_013_tachycardia.png",
-    "ocr_vitals": {
-      "heart_rate": 120,
-      "systolic_bp": 117,
-      "diastolic_bp": 74,
-      "spo2": 96,
-      "temperature": 37.7,
-      "pulse_rate": 121
-    },
-    "vital_vector": [
-      120,
-      117,
-      74,
-      96,
-      37.7,
-      121
-    ],
-    "metadata_vitals": {
-      "heart_rate": 114,
+      "heart_rate": 103,
       "systolic_bp": 114,
-      "diastolic_bp": 67,
-      "spo2": 99,
-      "temperature": 38.2,
-      "respiratory_rate": 16,
-      "pulse_rate": 73
+      "diastolic_bp": 77,
+      "spo2": 98,
+      "temperature": 39.9,
+      "pulse_rate": 104
+    },
+    "vital_vector": [
+      103,
+      114,
+      77,
+      98,
+      39.9,
+      104
+    ],
+    "metadata_vitals": {
+      "heart_rate": 102,
+      "systolic_bp": 112,
+      "diastolic_bp": 80,
+      "spo2": 97,
+      "temperature": 38.8,
+      "respiratory_rate": 17,
+      "pulse_rate": 82
     },
     "scenario": "tachycardia"
   },
   {
-    "filename": "monitor_014_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_014_hypertension.png",
+    "filename": "monitor_011_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_011_tachycardia.png",
     "ocr_vitals": {
       "heart_rate": 82,
-      "systolic_bp": 132,
-      "diastolic_bp": 101,
-      "spo2": 97,
-      "temperature": 35.0,
-      "pulse_rate": 79
+      "systolic_bp": 108,
+      "diastolic_bp": 93,
+      "spo2": 93,
+      "temperature": 35.2,
+      "pulse_rate": 84
     },
     "vital_vector": [
       82,
-      132,
-      101,
-      97,
-      35.0,
-      79
+      108,
+      93,
+      93,
+      35.2,
+      84
     ],
     "metadata_vitals": {
-      "heart_rate": 78,
-      "systolic_bp": 154,
-      "diastolic_bp": 98,
-      "spo2": 100,
-      "temperature": 37.3,
-      "respiratory_rate": 24,
-      "pulse_rate": 66
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_015_low_spo2.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_015_low_spo2.png",
-    "ocr_vitals": {
-      "heart_rate": 63,
-      "systolic_bp": 106,
-      "diastolic_bp": 101,
-      "spo2": 94,
-      "temperature": 36.3,
-      "pulse_rate": 62
-    },
-    "vital_vector": [
-      63,
-      106,
-      101,
-      94,
-      36.3,
-      62
-    ],
-    "metadata_vitals": {
-      "heart_rate": 66,
-      "systolic_bp": 124,
-      "diastolic_bp": 94,
-      "spo2": 97,
-      "temperature": 36.9,
-      "respiratory_rate": 16,
-      "pulse_rate": 60
-    },
-    "scenario": "low_spo2"
-  },
-  {
-    "filename": "monitor_016_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_016_hypertension.png",
-    "ocr_vitals": {
-      "heart_rate": 56,
-      "systolic_bp": 110,
-      "diastolic_bp": 52,
-      "spo2": 97,
-      "temperature": 37.4,
-      "pulse_rate": 55
-    },
-    "vital_vector": [
-      56,
-      110,
-      52,
-      97,
-      37.4,
-      55
-    ],
-    "metadata_vitals": {
-      "heart_rate": 60,
-      "systolic_bp": 124,
-      "diastolic_bp": 66,
-      "spo2": 99,
-      "temperature": 37.9,
-      "respiratory_rate": 19,
-      "pulse_rate": 112
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_017_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_017_hypertension.png",
-    "ocr_vitals": {
-      "heart_rate": 119,
-      "systolic_bp": 103,
-      "diastolic_bp": 99,
-      "spo2": 95,
-      "temperature": 36.8,
-      "pulse_rate": 116
-    },
-    "vital_vector": [
-      119,
-      103,
-      99,
-      95,
-      36.8,
-      116
-    ],
-    "metadata_vitals": {
-      "heart_rate": 111,
-      "systolic_bp": 101,
-      "diastolic_bp": 100,
-      "spo2": 96,
-      "temperature": 38.7,
-      "respiratory_rate": 13,
-      "pulse_rate": 63
-    },
-    "scenario": "hypertension"
-  },
-  {
-    "filename": "monitor_018_tachycardia.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_018_tachycardia.png",
-    "ocr_vitals": {
-      "heart_rate": 59,
+      "heart_rate": 91,
       "systolic_bp": 113,
-      "diastolic_bp": 75,
-      "spo2": 94,
-      "temperature": 36.2,
-      "pulse_rate": 62
-    },
-    "vital_vector": [
-      59,
-      113,
-      75,
-      94,
-      36.2,
-      62
-    ],
-    "metadata_vitals": {
-      "heart_rate": 61,
-      "systolic_bp": 125,
-      "diastolic_bp": 72,
-      "spo2": 97,
-      "temperature": 38.2,
-      "respiratory_rate": 18,
-      "pulse_rate": 117
+      "diastolic_bp": 85,
+      "spo2": 96,
+      "temperature": 36.3,
+      "respiratory_rate": 14,
+      "pulse_rate": 66
     },
     "scenario": "tachycardia"
   },
   {
-    "filename": "monitor_019_low_spo2.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_019_low_spo2.png",
+    "filename": "monitor_012_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_012_hypertension.png",
     "ocr_vitals": {
-      "heart_rate": 109,
-      "systolic_bp": 100,
-      "diastolic_bp": 91,
-      "spo2": 98,
-      "temperature": 37.7,
-      "pulse_rate": 106
+      "heart_rate": 113,
+      "systolic_bp": 144,
+      "diastolic_bp": 83,
+      "spo2": 95,
+      "temperature": 38.3,
+      "pulse_rate": 115
     },
     "vital_vector": [
-      109,
-      100,
-      91,
-      98,
-      37.7,
-      106
+      113,
+      144,
+      83,
+      95,
+      38.3,
+      115
     ],
     "metadata_vitals": {
-      "heart_rate": 106,
-      "systolic_bp": 102,
-      "diastolic_bp": 96,
+      "heart_rate": 111,
+      "systolic_bp": 146,
+      "diastolic_bp": 74,
+      "spo2": 98,
+      "temperature": 38.2,
+      "respiratory_rate": 23,
+      "pulse_rate": 91
+    },
+    "scenario": "hypertension"
+  },
+  {
+    "filename": "monitor_013_low_spo2.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_013_low_spo2.png",
+    "ocr_vitals": {
+      "heart_rate": 60,
+      "systolic_bp": 129,
+      "diastolic_bp": 58,
+      "spo2": 97,
+      "temperature": 37.8,
+      "pulse_rate": 58
+    },
+    "vital_vector": [
+      60,
+      129,
+      58,
+      97,
+      37.8,
+      58
+    ],
+    "metadata_vitals": {
+      "heart_rate": 66,
+      "systolic_bp": 123,
+      "diastolic_bp": 63,
       "spo2": 96,
-      "temperature": 39.0,
-      "respiratory_rate": 20,
-      "pulse_rate": 111
+      "temperature": 36.6,
+      "respiratory_rate": 22,
+      "pulse_rate": 101
     },
     "scenario": "low_spo2"
   },
   {
-    "filename": "monitor_020_hypertension.png",
-    "image_path": "/home/potato/Repositories/foundation-internship/generated_heart_monitors/monitor_020_hypertension.png",
+    "filename": "monitor_014_normal.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_014_normal.png",
     "ocr_vitals": {
-      "heart_rate": 56,
-      "systolic_bp": 154,
-      "diastolic_bp": 90,
-      "spo2": 97,
-      "temperature": 39.8,
-      "pulse_rate": 54
+      "heart_rate": 73,
+      "systolic_bp": 111,
+      "diastolic_bp": 63,
+      "spo2": 100,
+      "temperature": 35.0,
+      "pulse_rate": 71
     },
     "vital_vector": [
-      56,
-      154,
-      90,
-      97,
-      39.8,
-      54
+      73,
+      111,
+      63,
+      100,
+      35.0,
+      71
     ],
     "metadata_vitals": {
-      "heart_rate": 64,
-      "systolic_bp": 136,
-      "diastolic_bp": 100,
-      "spo2": 95,
-      "temperature": 38.9,
-      "respiratory_rate": 21,
-      "pulse_rate": 90
+      "heart_rate": 63,
+      "systolic_bp": 96,
+      "diastolic_bp": 64,
+      "spo2": 99,
+      "temperature": 36.2,
+      "respiratory_rate": 12,
+      "pulse_rate": 111
+    },
+    "scenario": "normal"
+  },
+  {
+    "filename": "monitor_015_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_015_tachycardia.png",
+    "ocr_vitals": {
+      "heart_rate": 94,
+      "systolic_bp": 113,
+      "diastolic_bp": 66,
+      "spo2": 98,
+      "temperature": 37.3,
+      "pulse_rate": 97
+    },
+    "vital_vector": [
+      94,
+      113,
+      66,
+      98,
+      37.3,
+      97
+    ],
+    "metadata_vitals": {
+      "heart_rate": 101,
+      "systolic_bp": 122,
+      "diastolic_bp": 70,
+      "spo2": 98,
+      "temperature": 36.9,
+      "respiratory_rate": 13,
+      "pulse_rate": 109
+    },
+    "scenario": "tachycardia"
+  },
+  {
+    "filename": "monitor_016_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_016_hypertension.png",
+    "ocr_vitals": {
+      "heart_rate": 100,
+      "systolic_bp": 156,
+      "diastolic_bp": 91,
+      "spo2": 98,
+      "temperature": 38.6,
+      "pulse_rate": 102
+    },
+    "vital_vector": [
+      100,
+      156,
+      91,
+      98,
+      38.6,
+      102
+    ],
+    "metadata_vitals": {
+      "heart_rate": 100,
+      "systolic_bp": 154,
+      "diastolic_bp": 84,
+      "spo2": 98,
+      "temperature": 38.1,
+      "respiratory_rate": 25,
+      "pulse_rate": 117
     },
     "scenario": "hypertension"
+  },
+  {
+    "filename": "monitor_017_tachycardia.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_017_tachycardia.png",
+    "ocr_vitals": {
+      "heart_rate": 54,
+      "systolic_bp": 124,
+      "diastolic_bp": 85,
+      "spo2": 94,
+      "temperature": 36.3,
+      "pulse_rate": 56
+    },
+    "vital_vector": [
+      54,
+      124,
+      85,
+      94,
+      36.3,
+      56
+    ],
+    "metadata_vitals": {
+      "heart_rate": 63,
+      "systolic_bp": 125,
+      "diastolic_bp": 99,
+      "spo2": 97,
+      "temperature": 36.9,
+      "respiratory_rate": 15,
+      "pulse_rate": 76
+    },
+    "scenario": "tachycardia"
+  },
+  {
+    "filename": "monitor_018_hypertension.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_018_hypertension.png",
+    "ocr_vitals": {
+      "heart_rate": 125,
+      "systolic_bp": 167,
+      "diastolic_bp": 66,
+      "spo2": 98,
+      "temperature": 40.1,
+      "pulse_rate": 124
+    },
+    "vital_vector": [
+      125,
+      167,
+      66,
+      98,
+      40.1,
+      124
+    ],
+    "metadata_vitals": {
+      "heart_rate": 119,
+      "systolic_bp": 159,
+      "diastolic_bp": 74,
+      "spo2": 96,
+      "temperature": 37.9,
+      "respiratory_rate": 21,
+      "pulse_rate": 109
+    },
+    "scenario": "hypertension"
+  },
+  {
+    "filename": "monitor_019_low_spo2.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_019_low_spo2.png",
+    "ocr_vitals": {
+      "heart_rate": 74,
+      "systolic_bp": 90,
+      "diastolic_bp": 82,
+      "spo2": 96,
+      "temperature": 38.6,
+      "pulse_rate": 72
+    },
+    "vital_vector": [
+      74,
+      90,
+      82,
+      96,
+      38.6,
+      72
+    ],
+    "metadata_vitals": {
+      "heart_rate": 76,
+      "systolic_bp": 93,
+      "diastolic_bp": 75,
+      "spo2": 98,
+      "temperature": 38.2,
+      "respiratory_rate": 17,
+      "pulse_rate": 63
+    },
+    "scenario": "low_spo2"
+  },
+  {
+    "filename": "monitor_020_normal.png",
+    "image_path": "C:\\Users\\junha\\OneDrive\\Documents\\GitHub\\foundation-internship\\generated_heart_monitors\\monitor_020_normal.png",
+    "ocr_vitals": {
+      "heart_rate": 127,
+      "systolic_bp": 102,
+      "diastolic_bp": 79,
+      "spo2": 99,
+      "temperature": 35.0,
+      "pulse_rate": 126
+    },
+    "vital_vector": [
+      127,
+      102,
+      79,
+      99,
+      35.0,
+      126
+    ],
+    "metadata_vitals": {
+      "heart_rate": 116,
+      "systolic_bp": 98,
+      "diastolic_bp": 82,
+      "spo2": 97,
+      "temperature": 36.3,
+      "respiratory_rate": 21,
+      "pulse_rate": 87
+    },
+    "scenario": "normal"
   }
 ]

@@ -1,21 +1,6 @@
 """
-Hybrid OCR + TensorFlow Training Lo    def __init__(self, debug_mode=False, use_dataset_fallback=True):
-        self.debug_mode = debug_mode
-        self.use_dataset_fallback = use_dataset_fallback
-        # Initialize PaddleOCR if available
-        if OCR_AVAILABLE:
-            self.paddle_ocr = PaddleOCR(use_angle_cls=True, lang='en', show_log=False)
-        else:
-            self.paddle_ocr = None
-            
-        self.vital_ranges = {
-            'heart_rate': (30, 250),
-            'systolic_bp': (60, 250),
-            'diastolic_bp': (30, 150),
-            'spo2': (70, 100),
-            'temperature': (30.0, 45.0),
-            'pulse_rate': (30, 250)
-        }=====================
+Hybrid OCR + TensorFlow Training Loop
+=====================================================
 
 This script uses OCR to extract the actual values displayed in the monitor images,
 then trains a CNN model to predict these OCR-extracted values (not the metadata ground truth).
@@ -39,8 +24,8 @@ from datetime import datetime
 # Check if PaddleOCR is available
 try:
     from paddleocr import PaddleOCR
-    # Test if PaddleOCR can be initialized
-    paddle_ocr = PaddleOCR(use_angle_cls=True, lang='en', show_log=False)
+    # Test if PaddleOCR can be initialized (remove unsupported parameters)
+    paddle_ocr = PaddleOCR(use_angle_cls=True, lang='en')
     OCR_AVAILABLE = True
     print("✅ OCR (PaddleOCR) is available")
 except (ImportError, Exception) as e:
@@ -56,6 +41,8 @@ class OCRGroundTruthExtractor:
         self.debug_mode = debug_mode
         self.use_dataset_fallback = use_dataset_fallback
         self.tesseract_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789./'
+        # Initialize PaddleOCR instance
+        self.paddle_ocr = paddle_ocr
         # Try different OCR configurations for better results
         self.ocr_configs = [
             r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789./',
@@ -207,24 +194,40 @@ class OCRGroundTruthExtractor:
             
             # Run OCR on original image
             try:
-                result = self.paddle_ocr.ocr(image_path, cls=True)
+                # Use predict() method for newer PaddleOCR versions
+                if hasattr(self.paddle_ocr, 'predict'):
+                    result = self.paddle_ocr.predict(image_path)
+                else:
+                    # Fallback for older versions
+                    result = self.paddle_ocr.ocr(image_path)
                 
                 # Extract text from OCR results
-                for idx in range(len(result)):
-                    res = result[idx]
-                    if res is not None:
-                        for line in res:
-                            text = line[1][0]  # Extract the text content
-                            confidence = line[1][1]  # Extract confidence score
-                            all_texts.append((text, confidence))
-                            
-                            # Extract numbers from text
-                            numbers = re.findall(r'\d+(?:\.\d+)?', text)
-                            for num in numbers:
-                                try:
-                                    all_numbers.append(float(num))
-                                except ValueError:
-                                    continue
+                if result and len(result) > 0:
+                    for idx in range(len(result)):
+                        res = result[idx]
+                        if res is not None:
+                            for line in res:
+                                # Handle different result formats
+                                if isinstance(line, (list, tuple)) and len(line) >= 2:
+                                    if isinstance(line[1], (list, tuple)) and len(line[1]) >= 2:
+                                        text = line[1][0]  # Extract the text content
+                                        confidence = line[1][1]  # Extract confidence score
+                                    else:
+                                        text = str(line[1])
+                                        confidence = 0.8  # Default confidence
+                                else:
+                                    text = str(line)
+                                    confidence = 0.8
+                                
+                                all_texts.append((text, confidence))
+                                
+                                # Extract numbers from text
+                                numbers = re.findall(r'\d+(?:\.\d+)?', text)
+                                for num in numbers:
+                                    try:
+                                        all_numbers.append(float(num))
+                                    except ValueError:
+                                        continue
                 
                 print(f"🔍 PaddleOCR extracted texts: {[t[0] for t in all_texts[:10]]}...")
                 
@@ -416,6 +419,261 @@ class OCRGroundTruthExtractor:
         
         print(f"📊 Generated dataset-informed vitals for {scenario}: {ocr_vitals}")
         return ocr_vitals
+
+class AdaptiveDatasetGenerator:
+    """Adaptive dataset generator that optimizes parameters for OCR accuracy"""
+    
+    def __init__(self, target_accuracy=0.8, max_iterations=5):
+        self.target_accuracy = target_accuracy
+        self.max_iterations = max_iterations
+        self.successful_params = None
+        self.generation_history = []
+        
+    def evaluate_dataset_quality(self, ocr_results):
+        """Evaluate how well OCR matches dataset ground truth"""
+        if not ocr_results:
+            return 0.0
+        
+        total_vitals = 0
+        accurate_vitals = 0
+        
+        # Define accuracy thresholds for each vital sign
+        accuracy_thresholds = {
+            'heart_rate': 10,      # ±10 bpm
+            'systolic_bp': 15,     # ±15 mmHg
+            'diastolic_bp': 10,    # ±10 mmHg
+            'spo2': 3,             # ±3%
+            'temperature': 1.0,    # ±1.0°C
+            'pulse_rate': 12       # ±12 bpm
+        }
+        
+        for result in ocr_results:
+            ocr_vitals = result['ocr_vitals']
+            dataset_vitals = result['metadata_vitals']
+            
+            for vital_name, threshold in accuracy_thresholds.items():
+                if vital_name in ocr_vitals and vital_name in dataset_vitals:
+                    total_vitals += 1
+                    error = abs(ocr_vitals[vital_name] - dataset_vitals[vital_name])
+                    if error <= threshold:
+                        accurate_vitals += 1
+        
+        accuracy = accurate_vitals / total_vitals if total_vitals > 0 else 0.0
+        return accuracy
+    
+    def generate_optimized_parameters(self, iteration=0):
+        """Generate different parameters for each iteration"""
+        # Base parameters
+        base_params = {
+            'width': 1000,
+            'height': 700,
+            'font_size_multiplier': 1.0,
+            'contrast_level': 1.0,
+            'text_spacing': 1.0,
+            'background_noise': 0.0
+        }
+        
+        # Adjust parameters based on iteration
+        if iteration == 0:
+            # First try: larger text, higher contrast
+            params = base_params.copy()
+            params.update({
+                'font_size_multiplier': 1.4,
+                'contrast_level': 1.3,
+                'text_spacing': 1.2
+            })
+        elif iteration == 1:
+            # Second try: even larger text, minimal noise
+            params = base_params.copy()
+            params.update({
+                'font_size_multiplier': 1.6,
+                'contrast_level': 1.5,
+                'text_spacing': 1.4,
+                'background_noise': 0.01
+            })
+        elif iteration == 2:
+            # Third try: focus on text clarity
+            params = base_params.copy()
+            params.update({
+                'width': 1200,
+                'height': 900,
+                'font_size_multiplier': 1.8,
+                'contrast_level': 1.2,
+                'text_spacing': 1.6
+            })
+        elif iteration == 3:
+            # Fourth try: maximum readability
+            params = base_params.copy()
+            params.update({
+                'width': 1400,
+                'height': 1000,
+                'font_size_multiplier': 2.0,
+                'contrast_level': 1.0,
+                'text_spacing': 2.0,
+                'background_noise': 0.0
+            })
+        else:
+            # Final try: conservative approach
+            params = base_params.copy()
+            params.update({
+                'font_size_multiplier': 1.2,
+                'contrast_level': 1.1,
+                'text_spacing': 1.1
+            })
+        
+        return params
+    
+    def regenerate_dataset_with_params(self, dataset_dir, params, num_images=20):
+        """Regenerate dataset with specific parameters"""
+        import sys
+        import os
+        
+        # Add the parent directory to Python path to import generate_imgs
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, parent_dir)
+        
+        try:
+            from generate_imgs import HeartMonitorGenerator
+        except ImportError:
+            print("❌ Could not import HeartMonitorGenerator")
+            return None
+        
+        # Create generator with optimized parameters
+        generator = HeartMonitorGenerator(
+            width=int(params['width']), 
+            height=int(params['height'])
+        )
+        
+        # Apply parameter modifications to generator
+        generator.font_size_multiplier = params.get('font_size_multiplier', 1.0)
+        generator.contrast_level = params.get('contrast_level', 1.0)
+        generator.text_spacing = params.get('text_spacing', 1.0)
+        generator.background_noise = params.get('background_noise', 0.0)
+        
+        print(f"🔄 Regenerating dataset with params: {params}")
+        
+        # Clear existing dataset - handle Windows permission issues
+        if os.path.exists(dataset_dir):
+            import shutil
+            try:
+                # Try to remove files individually first
+                for filename in os.listdir(dataset_dir):
+                    file_path = os.path.join(dataset_dir, filename)
+                    if os.path.isfile(file_path):
+                        try:
+                            os.remove(file_path)
+                        except PermissionError:
+                            print(f"⚠️ Could not remove {filename}, skipping...")
+                            pass
+                
+                # Try to remove directory
+                try:
+                    shutil.rmtree(dataset_dir)
+                except PermissionError:
+                    print(f"⚠️ Could not remove directory {dataset_dir}, will overwrite files instead")
+                    pass
+            except Exception as e:
+                print(f"⚠️ Error clearing dataset directory: {e}")
+                print("Will overwrite existing files instead")
+        
+        # Generate new dataset
+        dataset_info = generator.generate_dataset(
+            num_images=num_images, 
+            output_dir=dataset_dir
+        )
+        
+        return dataset_info
+    
+    def optimize_dataset_generation(self, dataset_dir, trainer, num_images=20):
+        """Optimize dataset generation for OCR accuracy"""
+        print(f"🎯 ADAPTIVE DATASET GENERATION")
+        print(f"Target accuracy: {self.target_accuracy:.1%}")
+        print("=" * 50)
+        
+        best_accuracy = 0.0
+        best_params = None
+        best_results = None
+        
+        for iteration in range(self.max_iterations):
+            print(f"\n🔄 Iteration {iteration + 1}/{self.max_iterations}")
+            
+            # Generate parameters for this iteration
+            params = self.generate_optimized_parameters(iteration)
+            
+            # Regenerate dataset with these parameters
+            dataset_info = self.regenerate_dataset_with_params(dataset_dir, params, num_images)
+            
+            if dataset_info is None:
+                print(f"❌ Failed to regenerate dataset in iteration {iteration + 1}")
+                continue
+            
+            # Test OCR accuracy on new dataset
+            try:
+                ocr_results = trainer.extract_ocr_ground_truth(dataset_dir)
+                accuracy = self.evaluate_dataset_quality(ocr_results)
+                
+                print(f"📊 OCR Accuracy: {accuracy:.1%}")
+                
+                # Store generation history
+                self.generation_history.append({
+                    'iteration': iteration + 1,
+                    'params': params,
+                    'accuracy': accuracy,
+                    'num_samples': len(ocr_results)
+                })
+                
+                # Check if this is the best so far
+                if accuracy > best_accuracy:
+                    best_accuracy = accuracy
+                    best_params = params
+                    best_results = ocr_results
+                    print(f"✅ New best accuracy: {accuracy:.1%}")
+                
+                # Check if we've met the target
+                if accuracy >= self.target_accuracy:
+                    print(f"🎉 Target accuracy {self.target_accuracy:.1%} achieved!")
+                    self.successful_params = params
+                    break
+                    
+            except Exception as e:
+                print(f"❌ Error evaluating dataset in iteration {iteration + 1}: {e}")
+                continue
+        
+        # Use best parameters for final generation
+        if best_params and best_accuracy < self.target_accuracy:
+            print(f"\n🔄 Using best parameters (accuracy: {best_accuracy:.1%})")
+            self.successful_params = best_params
+            if best_results:
+                return best_results
+            else:
+                # Regenerate with best params
+                self.regenerate_dataset_with_params(dataset_dir, best_params, num_images)
+                return trainer.extract_ocr_ground_truth(dataset_dir)
+        
+        # Print summary
+        print(f"\n📋 GENERATION SUMMARY")
+        print("-" * 30)
+        for entry in self.generation_history:
+            print(f"Iteration {entry['iteration']}: {entry['accuracy']:.1%} accuracy")
+        
+        if self.successful_params:
+            print(f"\n✅ Successful parameters saved for future use:")
+            for key, value in self.successful_params.items():
+                print(f"  {key}: {value}")
+        
+        return best_results if best_results else None
+    
+    def use_successful_parameters_for_generation(self, dataset_dir, num_images=20):
+        """Use previously successful parameters for new dataset generation"""
+        if not self.successful_params:
+            print("⚠️ No successful parameters available. Using default generation.")
+            return None
+        
+        print(f"🔄 Using previously successful parameters:")
+        for key, value in self.successful_params.items():
+            print(f"  {key}: {value}")
+        
+        return self.regenerate_dataset_with_params(dataset_dir, self.successful_params, num_images)
 
 class HybridCNNTrainer:
     """CNN trainer that uses OCR-extracted ground truth"""
@@ -744,10 +1002,20 @@ class HybridCNNTrainer:
 
 def main():
     """Main execution function"""
-    dataset_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_heart_monitors'))
+    # Look for dataset in the parent directory of TensorFlow folder
+    dataset_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'generated_heart_monitors'))
     
-    # Create trainer with adaptive generation enabled
-    trainer = HybridCNNTrainer(adaptive_generation=True, target_ocr_accuracy=0.75)
+    print(f"🔍 Looking for dataset in: {dataset_dir}")
+    
+    # Check if dataset exists
+    if not os.path.exists(dataset_dir):
+        print(f"❌ Dataset directory not found: {dataset_dir}")
+        print("Please make sure the generated_heart_monitors directory exists")
+        return
+    
+    # Create trainer with adaptive generation disabled to avoid permission issues
+    # Set adaptive_generation=True if you want to try optimizing the dataset
+    trainer = HybridCNNTrainer(adaptive_generation=False, target_ocr_accuracy=0.75)
     
     # Train model
     history = trainer.train_with_ocr_ground_truth(
@@ -765,357 +1033,6 @@ def main():
             with open('successful_generation_params.json', 'w') as f:
                 json.dump(trainer.dataset_generator.successful_params, f, indent=2)
             print(f"💾 Successful generation parameters saved to 'successful_generation_params.json'")
-    else:
-        print(f"\n❌ Training failed!")
-
-if __name__ == "__main__":
-    main()
-            print("❌ Not enough successful OCR extractions for training")
-            return None
-        
-        # Step 2: Prepare training data
-        X, y_norm, y_orig = self.prepare_training_data(ocr_results)
-        
-        # Step 3: Split data
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y_norm, test_size=0.2, random_state=42
-        )
-        
-        print(f"📈 Training set: {len(X_train)} samples")
-        print(f"📉 Test set: {len(X_test)} samples")
-        
-        # Step 4: Create and train model
-        self.model = self.create_cnn_model()
-        
-        # Callbacks
-        callbacks = [
-            tf.keras.callbacks.EarlyStopping(
-                monitor='val_mae', patience=15, restore_best_weights=True, verbose=1
-            ),
-            tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_mae', factor=0.5, patience=8, min_lr=1e-7, verbose=1
-            ),
-            tf.keras.callbacks.ModelCheckpoint(
-                'hybrid_ocr_cnn_best.keras', 
-                monitor='val_mae', save_best_only=True, verbose=1
-            )
-        ]
-        
-        # Training loop
-        print(f"\n🏋️ Training model (target MAE: {target_mae})...")
-        
-        history = self.model.fit(
-            X_train, y_train,
-            validation_data=(X_test, y_test),
-            epochs=epochs,
-            batch_size=8,
-            callbacks=callbacks,
-            verbose=1
-        )
-        
-        # Evaluate
-        test_loss, test_mae = self.model.evaluate(X_test, y_test, verbose=0)
-        print(f"\n📊 Final Test MAE: {test_mae:.4f}")
-        
-        # Denormalize and test predictions
-        self.evaluate_predictions(X_test, y_test, ocr_results[-len(X_test):])
-        
-        return history
-
-    def evaluate_predictions(self, X_test, y_test_norm, test_ocr_results):
-        """Evaluate predictions against OCR ground truth"""
-        print(f"\n🔍 EVALUATING PREDICTIONS")
-        print("-" * 40)
-        
-        # Make predictions
-        predictions_norm = self.model.predict(X_test, verbose=0)
-        
-        # Denormalize
-        predictions = self.target_scaler.inverse_transform(predictions_norm)
-        y_test = self.target_scaler.inverse_transform(y_test_norm)
-        
-        # Calculate per-vital MAE
-        for i, vital in enumerate(self.vital_signs_labels):
-            mae = mean_absolute_error(y_test[:, i], predictions[:, i])
-            print(f"{vital:<15}: MAE = {mae:6.2f}")
-        
-        # Show sample predictions
-        print(f"\n📋 SAMPLE PREDICTIONS:")
-        print("-" * 80)
-        
-        for i in range(min(5, len(predictions))):
-            if i < len(test_ocr_results):
-                filename = os.path.basename(test_ocr_results[i]['image_path'])
-                scenario = test_ocr_results[i].get('scenario', 'unknown')
-                print(f"\nImage: {filename} ({scenario})")
-                print("Predicted vs OCR Ground Truth vs Dataset Truth:")
-                
-                for j, vital in enumerate(self.vital_signs_labels):
-                    pred_val = predictions[i][j]
-                    ocr_val = y_test[i][j]
-                    dataset_val = test_ocr_results[i]['metadata_vitals'].get(vital, 0);
-                    
-                    pred_error = abs(pred_val - ocr_val);
-                    dataset_error = abs(ocr_val - dataset_val) if dataset_val else 0;
-                    
-                    if vital == 'temperature':
-                        print(f"  {vital:<12}: {pred_val:6.1f} vs {ocr_val:6.1f} vs {dataset_val:6.1f} (pred_err: {pred_error:5.1f}, ocr_err: {dataset_error:5.1f})")
-                    else:
-                        print(f"  {vital:<12}: {pred_val:6.0f} vs {ocr_val:6.0f} vs {dataset_val:6.0f} (pred_err: {pred_error:5.0f}, ocr_err: {dataset_error:5.0f})")
-
-class AdaptiveDatasetGenerator:
-    """Adaptive dataset generator that optimizes parameters for OCR accuracy"""
-    
-    def __init__(self, target_accuracy=0.8, max_iterations=5):
-        self.target_accuracy = target_accuracy
-        self.max_iterations = max_iterations
-        self.successful_params = None
-        self.generation_history = []
-        
-    def evaluate_dataset_quality(self, ocr_results):
-        """Evaluate how well OCR matches dataset ground truth"""
-        if not ocr_results:
-            return 0.0
-        
-        total_vitals = 0
-        accurate_vitals = 0
-        
-        # Define accuracy thresholds for each vital sign
-        accuracy_thresholds = {
-            'heart_rate': 10,      # ±10 bpm
-            'systolic_bp': 15,     # ±15 mmHg
-            'diastolic_bp': 10,    # ±10 mmHg
-            'spo2': 3,             # ±3%
-            'temperature': 1.0,    # ±1.0°C
-            'pulse_rate': 12       # ±12 bpm
-        }
-        
-        for result in ocr_results:
-            ocr_vitals = result['ocr_vitals']
-            dataset_vitals = result['metadata_vitals']
-            
-            for vital_name, threshold in accuracy_thresholds.items():
-                if vital_name in ocr_vitals and vital_name in dataset_vitals:
-                    total_vitals += 1
-                    error = abs(ocr_vitals[vital_name] - dataset_vitals[vital_name])
-                    if error <= threshold:
-                        accurate_vitals += 1
-        
-        accuracy = accurate_vitals / total_vitals if total_vitals > 0 else 0.0
-        return accuracy
-    
-    def generate_optimized_parameters(self, iteration=0):
-        """Generate different parameters for each iteration"""
-        # Base parameters
-        base_params = {
-            'width': 1000,
-            'height': 700,
-            'font_size_multiplier': 1.0,
-            'contrast_level': 1.0,
-            'text_spacing': 1.0,
-            'background_noise': 0.0
-        }
-        
-        # Adjust parameters based on iteration
-        if iteration == 0:
-            # First try: larger text, higher contrast
-            params = base_params.copy()
-            params.update({
-                'font_size_multiplier': 1.4,
-                'contrast_level': 1.3,
-                'text_spacing': 1.2
-            })
-        elif iteration == 1:
-            # Second try: even larger text, minimal noise
-            params = base_params.copy()
-            params.update({
-                'font_size_multiplier': 1.6,
-                'contrast_level': 1.5,
-                'text_spacing': 1.4,
-                'background_noise': 0.01
-            })
-        elif iteration == 2:
-            # Third try: focus on text clarity
-            params = base_params.copy()
-            params.update({
-                'width': 1200,
-                'height': 900,
-                'font_size_multiplier': 1.8,
-                'contrast_level': 1.2,
-                'text_spacing': 1.6
-            })
-        elif iteration == 3:
-            # Fourth try: maximum readability
-            params = base_params.copy()
-            params.update({
-                'width': 1400,
-                'height': 1000,
-                'font_size_multiplier': 2.0,
-                'contrast_level': 1.0,
-                'text_spacing': 2.0,
-                'background_noise': 0.0
-            })
-        else:
-            # Final try: conservative approach
-            params = base_params.copy()
-            params.update({
-                'font_size_multiplier': 1.2,
-                'contrast_level': 1.1,
-                'text_spacing': 1.1
-            })
-        
-        return params
-    
-    def regenerate_dataset_with_params(self, dataset_dir, params, num_images=20):
-        """Regenerate dataset with specific parameters"""
-        import sys
-        import os
-        
-        # Add the parent directory to Python path to import generate_imgs
-        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        sys.path.insert(0, parent_dir)
-        
-        try:
-            from generate_imgs import HeartMonitorGenerator
-        except ImportError:
-            print("❌ Could not import HeartMonitorGenerator")
-            return None
-        
-        # Create generator with optimized parameters
-        generator = HeartMonitorGenerator(
-            width=int(params['width']), 
-            height=int(params['height'])
-        )
-        
-        # Apply parameter modifications to generator
-        generator.font_size_multiplier = params.get('font_size_multiplier', 1.0)
-        generator.contrast_level = params.get('contrast_level', 1.0)
-        generator.text_spacing = params.get('text_spacing', 1.0)
-        generator.background_noise = params.get('background_noise', 0.0)
-        
-        print(f"🔄 Regenerating dataset with params: {params}")
-        
-        # Clear existing dataset
-        if os.path.exists(dataset_dir):
-            import shutil
-            shutil.rmtree(dataset_dir)
-        
-        # Generate new dataset
-        dataset_info = generator.generate_dataset(
-            num_images=num_images, 
-            output_dir=dataset_dir
-        )
-        
-        return dataset_info
-    
-    def optimize_dataset_generation(self, dataset_dir, trainer, num_images=20):
-        """Optimize dataset generation for OCR accuracy"""
-        print(f"🎯 ADAPTIVE DATASET GENERATION")
-        print(f"Target accuracy: {self.target_accuracy:.1%}")
-        print("=" * 50)
-        
-        best_accuracy = 0.0
-        best_params = None
-        best_results = None
-        
-        for iteration in range(self.max_iterations):
-            print(f"\n🔄 Iteration {iteration + 1}/{self.max_iterations}")
-            
-            # Generate parameters for this iteration
-            params = self.generate_optimized_parameters(iteration)
-            
-            # Regenerate dataset with these parameters
-            dataset_info = self.regenerate_dataset_with_params(dataset_dir, params, num_images)
-            
-            if dataset_info is None:
-                print(f"❌ Failed to regenerate dataset in iteration {iteration + 1}")
-                continue
-            
-            # Test OCR accuracy on new dataset
-            try:
-                ocr_results = trainer.extract_ocr_ground_truth(dataset_dir)
-                accuracy = self.evaluate_dataset_quality(ocr_results)
-                
-                print(f"📊 OCR Accuracy: {accuracy:.1%}")
-                
-                # Store generation history
-                self.generation_history.append({
-                    'iteration': iteration + 1,
-                    'params': params,
-                    'accuracy': accuracy,
-                    'num_samples': len(ocr_results)
-                })
-                
-                # Check if this is the best so far
-                if accuracy > best_accuracy:
-                    best_accuracy = accuracy
-                    best_params = params
-                    best_results = ocr_results
-                    print(f"✅ New best accuracy: {accuracy:.1%}")
-                
-                # Check if we've met the target
-                if accuracy >= self.target_accuracy:
-                    print(f"🎉 Target accuracy {self.target_accuracy:.1%} achieved!")
-                    self.successful_params = params
-                    break
-                    
-            except Exception as e:
-                print(f"❌ Error evaluating dataset in iteration {iteration + 1}: {e}")
-                continue
-        
-        # Use best parameters for final generation
-        if best_params and best_accuracy < self.target_accuracy:
-            print(f"\n🔄 Using best parameters (accuracy: {best_accuracy:.1%})")
-            self.successful_params = best_params
-            if best_results:
-                return best_results
-            else:
-                # Regenerate with best params
-                self.regenerate_dataset_with_params(dataset_dir, best_params, num_images)
-                return trainer.extract_ocr_ground_truth(dataset_dir)
-        
-        # Print summary
-        print(f"\n📋 GENERATION SUMMARY")
-        print("-" * 30)
-        for entry in self.generation_history:
-            print(f"Iteration {entry['iteration']}: {entry['accuracy']:.1%} accuracy")
-        
-        if self.successful_params:
-            print(f"\n✅ Successful parameters saved for future use:")
-            for key, value in self.successful_params.items():
-                print(f"  {key}: {value}")
-        
-        return best_results if best_results else None
-    
-    def use_successful_parameters_for_generation(self, dataset_dir, num_images=20):
-        """Use previously successful parameters for new dataset generation"""
-        if not self.successful_params:
-            print("⚠️ No successful parameters available. Using default generation.")
-            return None
-        
-        print(f"🔄 Using previously successful parameters:")
-        for key, value in self.successful_params.items():
-            print(f"  {key}: {value}")
-        
-        return self.regenerate_dataset_with_params(dataset_dir, self.successful_params, num_images)
-
-def main():
-    """Main execution function"""
-    dataset_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_heart_monitors'))
-    
-    # Create trainer
-    trainer = HybridCNNTrainer()
-    
-    # Train model
-    history = trainer.train_with_ocr_ground_truth(
-        dataset_dir=dataset_dir,
-        epochs=100,
-        target_mae=2.0
-    )
-    
-    if history:
-        print(f"\n✅ Training completed! Model saved as 'hybrid_ocr_cnn_best.keras'")
-        print(f"📄 OCR ground truth saved as 'ocr_ground_truth.json'")
     else:
         print(f"\n❌ Training failed!")
 
